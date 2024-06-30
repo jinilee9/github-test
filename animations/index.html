@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>과제 - 내 캐릭터로 애니메이션</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/galmuri/dist/galmuri.css">
+        <style>
+            *{margin:0;padding: 0;}
+            img{display:inline-block;}
+            ul,li{list-style: none;}
+            .container{
+                position: relative;
+                width: 1000px;
+                background-color: #fffcde;
+                padding: 80px 10px 0;
+                margin: 0 auto;
+            }
+            .body{
+                background: url(./images/body.png) no-repeat;
+                width: 476px;
+                height: 556px;
+                position: relative;
+            }
+            .body::before{
+                content: '';
+                display: block;
+                background: url(./images/hair.png) no-repeat;
+                width: 297px;
+                height: 254px;
+                position: absolute;
+                top: 7%;
+                left: 50%;
+                transform: translateX(-50%);
+                z-index: 99;
+            }
+            .eyes{
+                position: absolute;
+                top: 34%;
+                left: 48.5%;
+                transform: translateX(-48.5%);
+                display: flex;
+                align-items: center;
+                column-gap: 2.4rem;
+            }
+            .eyes-left{
+                width: 98px;
+                height: 50px;
+                background: url(./images/eye_L1-1.png) no-repeat;
+                background-size: 98px 50px;
+                animation: eyes-left 3s forwards;
+            }
+            .eyes-right{
+                width: 98px;
+                height: 50px;
+                background: url(./images/eye_R1-1.png) no-repeat;
+                background-size: 98px 50px;
+                animation: eyes-right 3s forwards;
+            }
+            .mouse{
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translateX(-50%);
+            }
+            .mouse-shape{
+                width: 40px;
+                height: 44px;
+                border-radius: 50%;
+                background-color: #EB7C68;
+                animation: mouse 3s forwards;
+            }
+            .obj{
+                position: absolute;
+                top: 28%;
+                left: 58%;
+                z-index: 100;
+            }
+            .notes{
+                display: flex;
+            }
+            .notes svg{
+                opacity: 0;
+            }
+            .notes01 svg{
+                width: 50px;
+                height: 44px;
+                animation: color-pink 1s infinite ease-out;
+                animation-delay: 0.2s;
+            }
+            .notes02 svg{
+                width: 34px;
+                height: 39px;
+                animation: color-green 1.2s infinite ease-out;
+                animation-delay: 0.4s;
+            }
+            .notes03 svg{
+                width: 27px;
+                height: 34px;
+                animation: color-purple .8s infinite ease-out;
+                animation-delay: 0.6s;
+            }
+            .notes04 svg{
+                width: 34px;
+                height: 39px;
+                animation: color-green 1.2s infinite ease-out;
+                animation-delay: 0.8s;
+            }
+            .notes li:nth-child(1){
+                margin-top: 4rem;
+            }
+            .notes li:nth-child(3){
+                margin: 2rem 0 0 1rem;
+            }
+            .notes li:nth-child(4){
+                margin: 1.8rem 0 0 1.4rem;
+            }
+            .text{
+                font-family: Galmuri9, sans-serif;
+                font-size: 32px;
+                margin-top: 50px;
+                margin-left: -10px;
+            }
+            .text li{
+                overflow: hidden;
+                white-space: nowrap;
+            }
+            .textani01, .textani03{
+                filter: blur(5px);
+                opacity: 0.5;
+                animation: blur 2s forwards;
+            }
+            .textani01{
+                animation-delay: 1s;
+            }
+            .textani02{
+                color: #00bbff;
+                animation: text-ani 5s steps(8) infinite;
+            }
+            .textani03{
+                animation-delay: 3s;
+            }
+            .text li+li{
+                margin-top: 10px;
+            }
+
+            /* animation */
+            @keyframes eyes-left {
+                100% { 
+                    height: 26px;
+                    background: url(./images/eye_L2-2.png) no-repeat;
+                    background-size: 98px 26px;
+                }
+            }
+            @keyframes eyes-right {
+                100% { 
+                    height: 26px;
+                    background: url(./images/eye_R2-2.png) no-repeat;
+                    background-size: 98px 26px;
+                }
+            }
+            @keyframes mouse{
+                100%{
+                    width: 85px;
+                    height: 30px;
+                    border-radius: 0 0 30px 30px;
+                }
+            }
+            @keyframes color-pink {
+                0%{
+                    transform: scale(0);
+                }
+                50%{
+                    transform: scale(1.2);
+                }
+                100%{
+                    opacity: 1;
+                    fill: #EF2480;
+                    transform: scale(1);
+                }
+            }
+            @keyframes color-purple {
+                0%{
+                    transform: scale(0);
+                }
+                50%{
+                    transform: scale(1.2);
+                }
+                100%{
+                    opacity: 1;
+                    fill: #5930E4;
+                    transform: scale(1);
+                }
+            }
+            @keyframes color-green {
+                0%{
+                    transform: scale(0);
+                }
+                50%{
+                    transform: scale(1.2);
+                }
+                100%{
+                    opacity: 1;
+                    fill: #08F47E;
+                    transform: scale(1);
+                }
+            }
+            @keyframes text-ani {
+                0%{
+                    width: 0;
+                }
+                50%{
+                    width: 100%;
+                }
+                100%{
+                    width: 0;
+                }
+            }
+            @keyframes blur {
+                100%{
+                    opacity: 1;
+                    filter: blur(0px);
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="body">
+                <div class="eyes">
+                    <div class="eyes-left"></div>
+                    <div class="eyes-right"></div>
+                </div>
+                <div class="mouse">
+                    <div class="mouse-shape"></div>
+                </div>
+            </div>
+            <div class="obj">
+                <ul class="notes">
+                    <li class="notes01">
+                        <svg viewBox="0 0 23 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M9.86969 12.27C11.0462 14.0759 10.0436 16.8175 7.6303 18.3935C5.21698 19.9694 2.30683 19.783 1.1303 17.977C-0.0462348 16.1711 0.956376 13.4295 3.36969 11.8535C5.78301 10.2776 8.69316 10.464 9.86969 12.27Z" />
+                            <path d="M21.8698 13C23.0463 14.806 22.0437 17.5475 19.6304 19.1235C17.217 20.6995 14.3069 20.513 13.1304 18.707C11.9538 16.9011 12.9564 14.1595 15.3698 12.5835C17.7831 11.0076 20.6932 11.194 21.8698 13Z" />
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M9.36969 2C9.92197 2 10.3697 2.39797 10.3697 2.88889L10.3697 14H8.36969L8.36969 2.88889C8.36969 2.39797 8.8174 2 9.36969 2Z" />
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M21.3697 3C21.922 3 22.3697 3.39797 22.3697 3.88889V15H20.3697V3.88889C20.3697 3.39797 20.8174 3 21.3697 3Z" />
+                            <path d="M8.36967 0.5C8.36967 0.223858 8.59353 0 8.86967 0H21.8697C22.1458 0 22.3697 0.223858 22.3697 0.5V5H8.36967V0.5Z" />
+                        </svg>
+                    </li>
+                    <li class="notes02">
+                        <svg viewBox="0 0 16 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M13.12 2.33333C11.872 2.33333 10.52 1.27778 10 0.5C10 1.27778 10.208 2.52 11.04 3.26667C12.08 4.2 12.08 3.73333 13.64 4.2C14.888 4.57333 15.2 5.6 15.72 7C16.76 4.2 14.68 2.33333 13.12 2.33333Z" />
+                            <path d="M9.86969 10.27C11.0462 12.0759 10.0436 14.8175 7.6303 16.3935C5.21698 17.9694 2.30683 17.783 1.1303 15.977C-0.0462348 14.1711 0.956376 11.4295 3.36969 9.85351C5.78301 8.27756 8.69316 8.46402 9.86969 10.27Z" />
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M9.36963 0C9.92191 2.67366e-08 10.3696 0.397969 10.3696 0.888889L10.3696 12H8.36962L8.36963 0.888889C8.36963 0.397969 8.81734 -2.67366e-08 9.36963 0Z" />
+                        </svg>
+                    </li>
+                    <li class="notes03">
+                        <svg viewBox="0 0 14 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M4.08357 0C4.5254 0 4.88357 0.358172 4.88357 0.8V16.2C4.88357 16.6418 4.5254 17 4.08357 17C3.64174 17 3.28357 16.6418 3.28357 16.2V0.8C3.28357 0.358172 3.64174 0 4.08357 0Z" />
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M9.08357 0C9.5254 0 9.88357 0.358172 9.88357 0.8V16.2C9.88357 16.6418 9.5254 17 9.08357 17C8.64174 17 8.28357 16.6418 8.28357 16.2V0.8C8.28357 0.358172 8.64174 0 9.08357 0Z" />
+                            <path d="M0 4.99733L12.2017 2.8754L12.9182 6.09924L0.71649 8.22117L0 4.99733Z" />
+                            <path d="M0.459961 11.0364L12.6617 8.91446L13.3475 12L1.14571 14.1219L0.459961 11.0364Z"/>
+                        </svg>
+                    </li>
+                    <li class="notes04">
+                        <svg viewBox="0 0 16 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M13.12 2.33333C11.872 2.33333 10.52 1.27778 10 0.5C10 1.27778 10.208 2.52 11.04 3.26667C12.08 4.2 12.08 3.73333 13.64 4.2C14.888 4.57333 15.2 5.6 15.72 7C16.76 4.2 14.68 2.33333 13.12 2.33333Z" />
+                            <path d="M9.86969 10.27C11.0462 12.0759 10.0436 14.8175 7.6303 16.3935C5.21698 17.9694 2.30683 17.783 1.1303 15.977C-0.0462348 14.1711 0.956376 11.4295 3.36969 9.85351C5.78301 8.27756 8.69316 8.46402 9.86969 10.27Z" />
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M9.36963 0C9.92191 2.67366e-08 10.3696 0.397969 10.3696 0.888889L10.3696 12H8.36962L8.36963 0.888889C8.36963 0.397969 8.81734 -2.67366e-08 9.36963 0Z" />
+                        </svg>   
+                    </li>
+                </ul>
+                <ul class="text">
+                    <li class="textani01">저는</li>
+                    <li class="textani02">
+                        <span>프</span>
+                        <span>론</span>
+                        <span>트</span>
+                        <span>엔</span>
+                        <span>드</span>
+                        <span>개</span>
+                        <span>발</span>
+                        <span>자</span>
+                    </li>
+                    <li class="textani03">입니다</li>
+                </ul>
+            </div>
+        </div>  
+    </body>
+</html>
